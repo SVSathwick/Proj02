@@ -1,4 +1,3 @@
-
 # Stores user metadata
 class UserData:
     def __init__(self, email, password):

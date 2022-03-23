@@ -4,7 +4,6 @@ import math
 
 from VirtualNodeMap import VirtualNodeMap
 
-
 class Node:
     def __init__(self, name, TOTAL_VIRTUAL_NODES, vnode_map=None):
         self._name = name

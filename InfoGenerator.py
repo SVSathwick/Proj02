@@ -13,6 +13,7 @@ class InfoGenerator:
     def generate_user_id(cls):
         cls._next_user += 1
         return cls._next_user
+        
 
     # Generates a random email address
     @staticmethod
