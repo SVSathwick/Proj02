@@ -8,6 +8,7 @@ from Node import Node
 TOTAL_VIRTUAL_NODES = 200
 DEFAULT_NUM_NODES = 4
 INITIAL_NUM_KEYS = 10000
+#INITIAL_NUM_KEYS = 200 #debug
 RANDOM_STRING_LENGTH = 8
 PASSWORD_LENGTH = 32
 
@@ -60,6 +61,7 @@ print('\n\n')
 # List random keys by calling any node
 print('Random pickup of various keys on any node')
 for i in range(10):
+    # user_id = i #debug
     user_id = random.randint(0, INITIAL_NUM_KEYS - 1)
     print(first_node.get_data(user_id))
 print('\n\n')

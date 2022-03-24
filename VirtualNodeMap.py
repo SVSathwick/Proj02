@@ -1,3 +1,4 @@
+from platform import node
 import random
 import math
 
@@ -25,7 +26,18 @@ class VirtualNodeMap:
         # Problem statement 1
         # Generate a dict of vnode ids (0 to (TOTAL_VIRTUAL_NODES - 1) mapped randomly 
         # but equally (as far as maths permits) to node names
-        pass
+        vnode_list = [i for i in range(0, self._TOTAL_VIRTUAL_NODES)]
+        random.shuffle(vnode_list)
+
+        for vnode in vnode_list:
+            index = vnode % len(self._node_names)
+            node_name = self._node_names[index]
+            self._vnode_map[vnode] = node_name
+
+        #debug print
+        #for key, val in self._vnode_map.items():
+        #    print(f'vnode: {key}, node_name: {val}')
+
 
     # Return the vnode name mapped to a particular vnode
     def get_node_for_vnode(self, vnode):

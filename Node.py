@@ -38,8 +38,14 @@ class Node:
         # Update this function to return value from local store if exists (assuming it's the owner)
         # Otherwise it should find the owner using get_assigned_node function in _vnode_map
         # and use get_data in that node to return the value
-
-        return self._data_store[key]
+        if key in self._data_store.keys():
+            return self._data_store[key]
+        else:
+            #get node name using get_assigned_node
+            node_name = self._vnode_map.get_assigned_node(key)
+            #get real node from node_dict
+            node = self._node_dict[node_name]
+            return node._data_store[key]
 
 
 
@@ -50,6 +56,10 @@ class Node:
     # 'force' will be used during rebalancing in node addition/deletion
     # This is so that data can be saved first before vnode map update
     def set_data(self, key, value, force=False):
+        #debug
+        #node_name_test = self._vnode_map.get_assigned_node(key)
+        #node_test = self._node_dict[node_name_test]
+
         if (force):
             self._data_store[key] = copy.deepcopy(value)
         else:
@@ -58,7 +68,10 @@ class Node:
             # Update this else section to find the owner using get_assigned_node function in _vnode_map
             # and set the value in the correct node. Use direct assignment if its the current node
             # or call set_data in the remote note otherwise
-            self._data_store[key] = copy.deepcopy(value)
+            #self._data_store[key] = copy.deepcopy(value)
+            node_name = self._vnode_map.get_assigned_node(key)
+            node = self._node_dict[node_name]
+            node._data_store[key] = copy.deepcopy(value)
 
     def remove_data(self, key):
         return self._data_store.pop(key, 'Key not found')
